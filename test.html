@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Test page</title>
+		<style>
+			.container {
+				height: max-content;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.slider {
+				width: 80%;
+			}
+
+			.slider > .slide-box {
+				margin: 5rem 0rem;
+			}
+
+			.slide-box {
+				height: 600px;
+				border: 0.1rem solid green;
+			}
+
+			.slide-box1 {
+				background: red;
+			}
+
+			.slide-box2 {
+				background: green;
+			}
+
+			.slide-box3 {
+				background: blue;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="slider">
+				<div class="slide-box slide-box1">
+					<img src="" alt="" class="slide" />
+				</div>
+				<div class="slide-box slide-box2">
+					<img src="" alt="" class="slide" />
+				</div>
+				<div class="slide-box slide-box3">
+					<img src="" alt="" class="slide" />
+				</div>
+			</div>
+		</div>
+		<script>
+			const oberver = (() => {
+				const io = new IntersectionObserver((elmt) => {
+					for (let i = 0; i < elmt.length; i++) {
+						if (elmt[i].isIntersecting) {
+							elmt[i].target.animate(
+								[
+									{
+										transform: "translateY(-600px)",
+										opacity: 0,
+									},
+									{ transform: "translateY(0)", opacity: 1 },
+								],
+								{ duration: 3000 }
+							);
+						}
+						break;
+					}
+				});
+				io.observe(document.querySelector(".slide-box1"));
+				io.observe(document.querySelector(".slide-box2"));
+				io.observe(document.querySelector(".slide-box3"));
+			})();
+		</script>
+	</body>
+</html>
